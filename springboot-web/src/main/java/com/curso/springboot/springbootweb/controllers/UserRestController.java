@@ -1,29 +1,27 @@
 package com.curso.springboot.springbootweb.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.web.bind.annotation.RestController;
+
+import com.curso.springboot.springbootweb.controllers.models.User;
+import com.curso.springboot.springbootweb.controllers.models.dto.UserDto;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("/path")
 public class UserRestController {
-
-    public String getMethodName(@RequestParam String param) {
-        return new String();
-    }
     
     @GetMapping("/restDetails")
-    public Map<String, Object> details() {
-        Map<String, Object> body = new HashMap<>();
-        
-        body.put("title", "Hola mundo");
-        body.put("name", "Cristhian");
-        body.put("lastName", "Martinez");
+    public UserDto details() {
+        User user =  new User("Andres", "Martinez");
+        UserDto userDto = new UserDto();
 
-        return body;
+        userDto.setUser(user);
+        userDto.setTitle("Hola mundo");
+
+        return userDto;
     }
 
 }
