@@ -1,12 +1,16 @@
 package com.curso.springboot.springbootweb.controllers;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.curso.springboot.springbootweb.controllers.models.User;
+
 
 @Controller
 public class UserController {
@@ -20,6 +24,21 @@ public class UserController {
 
         return "details";
     }
+
+    @GetMapping("/list")
+    public String list(ModelMap model) {
+        List<User> users = Arrays.asList(
+            new User("lalo", "pig"),
+            new User("otro", "pig", "correo@com"),
+            new User("pepa", "pig")
+        );
+
+        model.addAttribute("users", users);
+        model.addAttribute("title", "Listado de usuarios");
+
+        return "list";
+    }
+    
 
     @GetMapping("/detail")
     public String detail(Map<String, Object> model) {
